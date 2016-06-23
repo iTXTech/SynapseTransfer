@@ -107,11 +107,11 @@ class SynapseTransfer extends PluginBase{
 				if($command->testPermission($sender)){
 					foreach($this->list as $c){
 						if(($data = $this->getClientDataByDescription($c)) != null){
-							$sender->sendMessage("Address: {$data["ip"]} Port: {$data["port"]} Status: " . TextFormat::GREEN .
-								"Online" . TextFormat::WHITE . "Players: " . TextFormat::GREEN . "{$data["playerCount"]}" .
+							$sender->sendMessage("ID: $c Status: " . TextFormat::GREEN .
+								"Online" . TextFormat::WHITE . " Players: " . TextFormat::GREEN . "{$data["playerCount"]}" .
 								TextFormat::WHITE . "/" . TextFormat::YELLOW . "{$data["maxPlayers"]}");
 						}else{
-							$sender->sendMessage("Address: {$data["ip"]} Port: {$data["port"]} Status: " . TextFormat::RED .
+							$sender->sendMessage("ID: $c Status: " . TextFormat::RED .
 								"Offline");
 						}
 					}
