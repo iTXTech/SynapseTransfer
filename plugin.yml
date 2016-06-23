@@ -1,0 +1,39 @@
+name: SynapseTransfer
+version: 1.0.0
+api: 2.0.0
+geniapi: 1.8.0
+author: iTX Technologies
+main: synapsetransfer\SynapseTransfer
+description: A simple plugin which enables you to transfer between serveal Synapse Cients
+website: https://itxtech.org
+
+commands:
+ transfer:
+  usage: /transfer <player> <serverId>
+  description: Transfer a player to another Synapse Client
+  permission: SynapseTransfer.transfer
+
+ listclients:
+  usage: /listclients
+  description: List Synapse Clients and their serverIds
+  permission: SynapseTransfer.listclients
+
+ scid:
+  usage: /scid <add|remove> <Id> <CllientDescription>
+  description: Add or remove a client
+  permission: SynapseTransfer.scid
+
+permissions:
+ SynapseTransfer:
+  default: op
+  description: SynapseTransfer permissions
+  children:
+   SynapseTransfer.transfer:
+    default: yes
+    description: Transfer a player
+  SynapseTransfer.listclients:
+   default: yes
+   descriprion: List Synapse Clients
+  SynapseTransfer.scid:
+   default: yes
+   description: Add or remove a client
