@@ -99,6 +99,7 @@ class SynapseTransfer extends PluginBase{
 							if(isset($args[1]) and isset($args[2])){
 								$this->list[$args[1]] = $args[2];
 								$sender->sendMessage(TextFormat::GREEN . "$args[1] => $args[2]");
+								return true;
 							}
 							$sender->sendMessage(TextFormat::RED . "Missing arguments");
 							break;
@@ -106,6 +107,7 @@ class SynapseTransfer extends PluginBase{
 							if(isset($this->list[$args[1]])){
 								unset($this->list[$args[1]]);
 								$sender->sendMessage(TextFormat::GREEN . "$args[1] has been removed successfully");
+								return true;
 							}
 							$sender->sendMessage(TextFormat::RED .  "$args[1] does not exist");
 							break;
