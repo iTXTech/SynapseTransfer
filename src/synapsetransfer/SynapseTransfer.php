@@ -125,11 +125,11 @@ class SynapseTransfer extends PluginBase{
 						if(strtolower($args[0]) == strtolower($sender->getName())){
 							$player = $this->getServer()->getPlayerExact($args[0]);
 							if($player instanceof Player and ($hash = $this->getClientHashByDescription($args[1])) != null){
-								if($hash == $sender->getServer()->getSynapse()->getHash()){
+								if($args[1] == $sender->getServer()->getSynapse()->getDescription()){
 									$sender->sendMessage(TextFormat::RED . "Cannot transfer to the current server");
 									return true;
 								}
-								$this->getServer()->broadcastMessage(TextFormat::AQUA . "[SynapseTransfer] " . $player->getName() . " has been transferred to $hash");
+								$this->getServer()->broadcastMessage(TextFormat::AQUA . "[SynapseTransfer] " . $player->getName() . " has been transferred to $args[1]");
 								$player->transfer($hash);
 							}else{
 								$sender->sendMessage(TextFormat::RED . "$args[0] is not a SynapsePlayer or $args[1] is not a SynapseClient");
@@ -137,12 +137,12 @@ class SynapseTransfer extends PluginBase{
 						}
 					}elseif(count($args) == 1){
 						if(($hash = $this->getClientHashByDescription($args[0])) != null){
-							if($hash == $sender->getServer()->getSynapse()->getHash()){
+							if($args[0] == $sender->getServer()->getSynapse()->getDescription()){
 								$sender->sendMessage(TextFormat::RED . "Cannot transfer to the current server");
 								return true;
 							}
 							if($sender instanceof Player){
-								$this->getServer()->broadcastMessage(TextFormat::AQUA . "[SynapseTransfer] " . $sender->getName() . " has been transferred to $hash");
+								$this->getServer()->broadcastMessage(TextFormat::AQUA . "[SynapseTransfer] " . $sender->getName() . " has been transferred to $args[0]");
 								$sender->transfer($hash);
 							}else{
 								$sender->sendMessage(TextFormat::RED . "You must be a SynapsePlayer to execute this command");
