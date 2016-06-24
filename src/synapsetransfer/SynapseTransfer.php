@@ -51,6 +51,17 @@ class SynapseTransfer extends PluginBase{
 	}
 
 	/**
+	 * @param string $ld
+	 * @return null|string
+	 */
+	public function getDescriptionByListData(string $ld){
+		if(isset($this->list[$ld])){
+			return $this->list[$ld];
+		}
+		return null;
+	}
+
+	/**
 	 * @param $des
 	 * @return array|null
 	 */
@@ -124,8 +135,13 @@ class SynapseTransfer extends PluginBase{
 					if(count($args) == 2){
 						if(strtolower($args[0]) == strtolower($sender->getName())){
 							$player = $this->getServer()->getPlayerExact($args[0]);
-							if($player instanceof Player and ($hash = $this->getClientHashByDescription($args[1])) != null){
-								if($args[1] == $sender->getServer()->getSynapse()->getDescription()){
+							$des = $this->getDescriptionByListData($args[1]);
+							if($des == null){
+								$sender->sendMessage(TextFormat::RED . "Undefined SynapseClient $args[1]");
+								return true;
+							}
+							if($player instanceof Player and ($hash = $this->getClientHashByDescription($des)) != null){
+								if($des == $sender->getServer()->getSynapse()->getDescription()){
 									$sender->sendMessage(TextFormat::RED . "Cannot transfer to the current server");
 									return true;
 								}
@@ -136,8 +152,13 @@ class SynapseTransfer extends PluginBase{
 							}
 						}
 					}elseif(count($args) == 1){
-						if(($hash = $this->getClientHashByDescription($args[0])) != null){
-							if($args[0] == $sender->getServer()->getSynapse()->getDescription()){
+						$des = $this->getDescriptionByListData($args[0]);
+						if($des == null){
+							$sender->sendMessage(TextFormat::RED . "Undefined SynapseClient $args[0]");
+							return true;
+						}
+						if(($hash = $this->getClientHashByDescription($des)) != null){
+							if($des == $sender->getServer()->getSynapse()->getDescription()){
 								$sender->sendMessage(TextFormat::RED . "Cannot transfer to the current server");
 								return true;
 							}
