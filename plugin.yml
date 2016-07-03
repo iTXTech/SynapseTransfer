@@ -4,7 +4,7 @@ api: 2.0.0
 geniapi: 1.8.0
 author: iTX Technologies
 main: synapsetransfer\SynapseTransfer
-description: A simple plugin which enables you to transfer between serveal Synapse Cients
+description: A simple plugin which enables you to transfer between several Synapse Cients
 website: https://itxtech.org
 
 commands:
