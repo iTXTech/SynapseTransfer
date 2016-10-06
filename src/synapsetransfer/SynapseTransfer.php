@@ -31,7 +31,8 @@ class SynapseTransfer extends PluginBase{
 		$this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML, [
 			"list" => [
 				"1" => "1"
-			]
+			],
+			"show-transfer-message" => true
 		]);
 		$this->conf = $this->config->getAll();
 		$this->list = $this->conf["list"];
@@ -147,7 +148,9 @@ class SynapseTransfer extends PluginBase{
 									$sender->sendMessage(TextFormat::RED . "Cannot transfer to the current server");
 									return true;
 								}
-								$this->getServer()->broadcastMessage(TextFormat::AQUA . "[SynapseTransfer] " . $player->getName() . " has been transferred to $args[1]");
+								if($this->conf["show-transfer-message"] == true){
+									$this->getServer()->broadcastMessage(TextFormat::AQUA . "[SynapseTransfer] " . $player->getName() . " has been transferred to $args[1]");
+								}
 								$player->transfer($hash);
 							}else{
 								$sender->sendMessage(TextFormat::RED . "$args[0] is not a SynapsePlayer or $args[1] is not a SynapseClient");
@@ -165,7 +168,9 @@ class SynapseTransfer extends PluginBase{
 								return true;
 							}
 							if($sender instanceof Player){
-								$this->getServer()->broadcastMessage(TextFormat::AQUA . "[SynapseTransfer] " . $sender->getName() . " has been transferred to $args[0]");
+								if($this->conf["show-transfer-message"] == true){
+									$this->getServer()->broadcastMessage(TextFormat::AQUA . "[SynapseTransfer] " . $sender->getName() . " has been transferred to $args[0]");
+								}
 								$sender->transfer($hash);
 							}else{
 								$sender->sendMessage(TextFormat::RED . "You must be a SynapsePlayer to execute this command");
